@@ -7,7 +7,7 @@ const userSchema = new Schema({
     phone: Number,
     role: { type: String, default: 'user' },
     modules: { type: Array, default: [] },
-    status: { type: Boolean, default: 'active' },
+    status: { type: String, default: 'active' },
     creation_date: { type: Date, default: Date.now }
 });
 

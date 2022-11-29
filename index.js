@@ -5,10 +5,13 @@ import morgan from 'morgan';
 import cookieParser from "cookie-parser";
 import { connect } from 'mongoose'
 import * as dotenv from 'dotenv'
+import { validateToken } from "./middlewares/validateToken.js";
+
 dotenv.config()
 
 // routes import
 import accountRouter from './routes/account.js'
+import streamRouter from './routes/stream.js'
 
 /**
  * Express Config
@@ -41,10 +44,11 @@ app.get('/status', async (req, res) => {
 })
 
 app.use('/api', accountRouter)
+
 /**
  * Validation Token Middleware
  */
-// app.use('/api', validateToken, studentRouter)
+app.use('/api', validateToken, streamRouter)
 
 
 /**
@@ -52,7 +56,7 @@ app.use('/api', accountRouter)
  */
 const start = async () => {
     try {
-        const port = 3000
+        const port = 3001
         app.listen(port, () => console.log(`Server started on port ${port}`));
         await connect(process.env.MONGO_URI, options)
         console.log('Mongo DB Connected')

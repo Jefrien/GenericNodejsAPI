@@ -4,6 +4,7 @@ import { errorTokens } from "../utils/errorsToken.js";
 export const validateToken = (req, res, next) => {
     try {
         let token = req.headers?.authorization;
+        console.log(token)
         if (!token) throw new Error("Unauthorized");
 
         token = token.split(" ")[1];
